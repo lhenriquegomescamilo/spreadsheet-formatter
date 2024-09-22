@@ -18,11 +18,9 @@ val arrowKtVersion = "1.2.4"
 dependencies {
     implementation("io.arrow-kt:arrow-core:$arrowKtVersion")
     implementation("io.arrow-kt:arrow-fx-coroutines:$arrowKtVersion")
-    implementation("org.slf4j:slf4j-api:2.0.16")
 
-
-
-    runtimeOnly("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0")
+    implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+    implementation("ch.qos.logback:logback-classic:1.4.12")
 
     testImplementation("io.mockk:mockk:1.13.12")
     testImplementation("io.kotest:kotest-runner-junit5:5.9.0")

@@ -5,6 +5,7 @@ import com.camilo.ProcessExpensesError.SourceDataFiled
 import org.slf4j.LoggerFactory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import mu.KotlinLogging
 import java.io.File
 
 sealed class ProcessExpensesError(message: String) : RuntimeException(message) {
@@ -23,11 +24,11 @@ class ProcessExpenses(
     private val outputDataGateway: OutputDataGateway<ProcessExpensesError, File>
 ) {
 
-    private val log = LoggerFactory.getLogger(this.javaClass)
+    private val log = KotlinLogging.logger { }
 
     suspend fun execute(inputFilePath: String, outputFilePath: String) = either<ProcessExpensesError, File> {
         val rowAsFlow = sourceData.read(inputFilePath)
-            .onLeft { log.error("Failed to source of data $inputFilePath", it) }
+            .onLeft { log.error(it) { "Failed to source of data $inputFilePath" } }
             .mapLeft { SourceDataFiled }
             .bind()
 

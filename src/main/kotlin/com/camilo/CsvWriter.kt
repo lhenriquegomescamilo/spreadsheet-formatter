@@ -8,13 +8,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import mu.KotlinLogging
 import org.slf4j.LoggerFactory
 import java.io.File
 
 
 class CsvWriter(private val delimiter: String = ";") : OutputDataGateway<ProcessExpensesError, File> {
 
-    private val log = LoggerFactory.getLogger(this.javaClass)
+    private val log = KotlinLogging.logger { }
 
     override suspend fun writeData(
         filePath: String,
@@ -37,7 +38,7 @@ class CsvWriter(private val delimiter: String = ";") : OutputDataGateway<Process
             }
             fileToWrite.right()
         } catch (exception: Exception) {
-            log.error("While try to process file $filePath", exception)
+            log.error(exception) { "While try to process file $filePath" }
             FailedWhileWriteFile.left()
         }
 
