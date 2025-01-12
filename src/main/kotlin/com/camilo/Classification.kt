@@ -1,6 +1,5 @@
 package com.camilo
 
-import com.camilo.CreateExpenseMapperUseCaseErrors.InputDataIsEmpty
 import mu.KotlinLogging
 
 sealed class CreateExpenseMapperUseCaseErrors(override val message: String) : RuntimeException(message) {

@@ -28,10 +28,9 @@ class ProcessExpensesTest {
         val lines = output.shouldBeRight().readLines()
         lines shouldBeEqual listOf(
             "Valor;Observações;Saldo;Data Pagamento",
-            "-16.00;Transferência para Nr. XXXXX2897;82.00;23-09-2024",
-            "-7.99;Google *youtube Member;90.00;20-09-2024",
-            "-10;Pagamento, S.a.;100;18-09-2024"
+            "16.00;Transferência para Nr. XXXXX2897;82.00;23-09-2024",
+            "7.99;Google *youtube Member;90.00;20-09-2024",
+            "10;Pagamento, S.a.;100;18-09-2024"
         )
-
     }
 }
