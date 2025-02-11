@@ -27,6 +27,7 @@ class ProcessExpenses(
     private val log = KotlinLogging.logger { }
 
     suspend fun execute(inputFilePath: String, outputFilePath: String) = either<ProcessExpensesError, File> {
+
         val rowAsFlow: Flow<List<Map<String, String>>> = sourceData.read(inputFilePath)
             .onLeft { log.error(it) { "Failed to source of data $inputFilePath" } }
             .mapLeft { SourceDataFiled }
@@ -44,8 +45,9 @@ class ProcessExpenses(
     }
 
     private fun stringToBigDecimal(value: String): String = runCatching {
-        BigDecimal(value).abs().toString()
-    }.getOrElse {
-        value
+        BigDecimal(value.replace(",", ".").trim()).abs().toString()
     }
+        .onSuccess { log.info { "parsed with success value $value" } }
+        .onFailure { log.error { "failed to parse $value" } }
+        .getOrElse { value }
 }

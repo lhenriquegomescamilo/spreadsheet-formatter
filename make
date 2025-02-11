@@ -2,4 +2,4 @@
 
 chmod +x ./gradlew
 ./gradlew clean test
-./gradlew shadowJar -x test
+./gradlew clean build shadowJar -x test

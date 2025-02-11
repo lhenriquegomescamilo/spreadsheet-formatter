@@ -18,9 +18,15 @@ class CSVReaderTest {
         val path = "input.transaction.csv".getPathAsString()
         val csvFile = CsvReader().read(path)
         val toList = csvFile.shouldBeRight().toList()
+
         toList
             .shouldHaveSize(3)
             .shouldBeInstanceOf<List<List<Map<String, String>>>>()
+
+        csvFile.shouldBeRight().toList().apply {
+            this shouldHaveSize 3
+            this.shouldBeInstanceOf<List<List<Map<String, String>>>>()
+        }
     }
 
     @Test

@@ -28,7 +28,6 @@ class Main {
                     mapper = mapOf(
                         "Montante( EUR )" to "Valor",
                         "Descrição" to "Observações",
-                        "Saldo Contabilístico( EUR )" to "Saldo",
                         "Data valor" to "Data Pagamento",
                     )
                 )
